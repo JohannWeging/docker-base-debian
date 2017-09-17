@@ -1,0 +1,12 @@
+FROM debian:latest
+
+ENV DEBIAN_FRONTEND=noninteractive DUMB_INIT_VERSION=1.2.0 GOSU_VERSION=1.10
+
+RUN set -x \
+&& apt-get -y update \
+&& apt-get -y upgrade \
+&& apt-get -y install curl \
+&& curl -SL https://github.com/Yelp/dumb-init/releases/download/v$DUMB_INIT_VERSION/dumb-init_${DUMB_INIT_VERSION}_amd64 > /usr/bin/dumb-init \
+&& chmod +x /usr/bin/dumb-init \
+&& curl -SL https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-amd64 > /usr/bin/gosu \
+&& chmod +x /usr/bin/gosu
