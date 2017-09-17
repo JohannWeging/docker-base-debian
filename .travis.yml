@@ -1,0 +1,28 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+env:
+  - VERSION=8
+  - VERSION=9
+  - VERSION=testing
+  - VERSION=latest
+
+install: true
+
+before_script:
+  - docker --version
+
+script:
+  - cat Dockerfile.tmpl | envsubst '$VERSION' > Dockerfile
+  - docker build -t johannweging/base-debian:${VERSION} ./
+
+before_deploy:
+  - docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+
+deploy:
+  provider: script
+  script: docker push johannweging/base-debian:${VERSION}
+  on:
+    all_branches: true
