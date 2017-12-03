@@ -1,6 +1,6 @@
 FROM debian:latest
 
-ENV DEBIAN_FRONTEND=noninteractive DUMB_INIT_VERSION=1.2.0 GOSU_VERSION=1.10
+ENV DEBIAN_FRONTEND=noninteractive DUMB_INIT_VERSION=1.2.1 GOSU_VERSION=1.10
 
 RUN set -x \
 && apt-get -y update \
